@@ -99,9 +99,26 @@ classdef BinaryFlagsGUI < handle
             flagValues = obj.flags;
         end
 
+        function groupFlags = getFlagsPerGroup(obj, groupName)
+            % Get the flags associated with a specific group
+            groupIndex = find(strcmp(obj.namesOfGroups, groupName));
+            if isempty(groupIndex)
+                error('Invalid group name');
+            end
+            groupFlags = obj.flags{groupIndex};
+        end
+
         function isClosed = isGUIWindowClosed(obj)
             % Check if the GUI window is closed
             isClosed = ~isvalid(obj.fig) || ~ishandle(obj.fig);
+        end
+
+        function numOfGroups = getNumGroups(obj)
+            numOfGroups = obj.numGroups;
+        end
+
+        function groupName = getGroupName(obj, index)
+            groupName = obj.namesOfGroups{index};
         end
     end
 end
