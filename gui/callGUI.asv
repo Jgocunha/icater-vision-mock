@@ -1,0 +1,17 @@
+function gui = callGUI()
+    % Create the GUI
+    namesOfGroups = {'Hand approaching', ...
+                    'Hand reaching out', ...
+                    'Pointing [Robot workspace]', ...
+                    'Pointing [Shared workspace]', ...
+                    'Pointing [Human workspace]', ...
+                    'Group D', 'Random'};
+    numGroups = numel(namesOfGroups);
+    namesOfFlagsPerGroup = {'Part 1', 'Part 2', 'Bracket 1', 'Bracket 2', 'Other'... % Hand approaching
+                            'Toggle', ... % Hand reaching out
+                            'Part 1', 'Part 2', 'Bracket 1', 'Bracket 2', 'Other'... % Hand approaching
+                            'Part 1', 'Part 2', 'Bracket 1', 'Bracket 2', 'Other'... % Hand approaching
+                            'y'};
+    flagsPerGroup = [5 1 4 3 1];
+    gui = BinaryFlagsGUI(numGroups, flagsPerGroup, namesOfGroups, namesOfFlagsPerGroup);
+end
