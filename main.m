@@ -1,3 +1,9 @@
+% Get the full path to the gui folder relative to the current script
+guiFolderPath = fullfile(fileparts(mfilename('fullpath')), 'gui');
+
+% Add the gui folder to the MATLAB path
+addpath(guiFolderPath);
+
 % Create the GUI and assign it to the variable 'gui'
 gui = callGUI();
 
