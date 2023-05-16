@@ -2,8 +2,7 @@
 
 A GUI (in MATLAB) to mock the inputs given by the vision system, for the I-CATER project.
 
-![The GUI](https://imgur.com/a/d0NuOUU.png)
-
+![The GUI](images/gui-example.png)
 
 ## File overview
 ```
@@ -18,7 +17,7 @@ A GUI (in MATLAB) to mock the inputs given by the vision system, for the I-CATER
 - `callGUI.m`: This file is a function that creates an instance of the `BinaryFlagsGUI` class and returns it. It sets up the necessary parameters, such as the number of flag groups, names of groups, and names of flags per group. This function is responsible for initializing and configuring the GUI.
 - `main.m`: this file contains the main script that utilizes the `BinaryFlagsGUI` class. It creates an instance of the GUI by calling `callGUI()` and enters a while loop that continues until the GUI window is closed. Within the loop, it retrieves the flag values from the GUI and prints them for each flag group. **This script demonstrates how to interact with the GUI and retrieve the flag values dynamically.**
 
-![Output of the main.m script](https://imgur.com/a/FeqnhM4.png)
+![Output of the main.m script](images/main.m-output.png)
 
 ---
 
