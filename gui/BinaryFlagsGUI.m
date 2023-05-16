@@ -10,8 +10,9 @@ classdef BinaryFlagsGUI < handle
     end
     
     methods
+        % Constructor
         function obj = BinaryFlagsGUI(numGroups, flagsPerGroup, namesOfGroups, namesOfFlagsPerGroup)
-            % Constructor
+            % Constructor initializes the properties of the class
             obj.numGroups = numGroups;
             obj.flagsPerGroup = flagsPerGroup;
             obj.namesOfGroups = namesOfGroups;
@@ -23,6 +24,7 @@ classdef BinaryFlagsGUI < handle
             obj.createGUI();
         end
 
+        % Method to create the GUI
         function createGUI(obj)
             % Create a figure window
             sizeX = 1000;
@@ -78,12 +80,14 @@ classdef BinaryFlagsGUI < handle
                 end
             end
         end
-
+        
+        % Callback function for flag toggling
         function toggleFlag(obj, ~, ~, group, flag)
             obj.flags{group}(flag) = ~obj.flags{group}(flag);
             obj.drawSemaphore(group, flag);
         end
 
+        % Method to draw the semaphore based on flag value
         function drawSemaphore(obj, group, flag)
             flagValue = obj.flags{group}(flag);
             ax = obj.semaphoreAxes{group, flag};
@@ -93,33 +97,82 @@ classdef BinaryFlagsGUI < handle
                 rectangle(ax, 'Position', [0, 0, 30, 30], 'Curvature', [1, 1], 'FaceColor', 'red');
             end
         end
-    
+
+        % Getter method to access the flags cell array
         function flagValues = getFlags(obj)
-            % Getter method to access the flags cell array
             flagValues = obj.flags;
         end
-
+        
+        % Get the flags associated with a specific group
         function groupFlags = getFlagsPerGroup(obj, groupName)
-            % Get the flags associated with a specific group
             groupIndex = find(strcmp(obj.namesOfGroups, groupName));
             if isempty(groupIndex)
                 error('Invalid group name');
             end
             groupFlags = obj.flags{groupIndex};
         end
-
+    
+        % Check if the GUI window is closed
         function isClosed = isGUIWindowClosed(obj)
-            % Check if the GUI window is closed
             isClosed = ~isvalid(obj.fig) || ~ishandle(obj.fig);
         end
 
+        % Get the number of flag groups
         function numOfGroups = getNumGroups(obj)
             numOfGroups = obj.numGroups;
         end
 
+        % Get the name of a group by its index
         function groupName = getGroupName(obj, index)
             groupName = obj.namesOfGroups{index};
         end
     end
 end
 
+
+% This code defines a class `BinaryFlagsGUI` which represents a graphical 
+% user interface (GUI) for managing binary flags organized into groups. 
+% Here's an overview of the key components and functionalities of the class:
+% 
+% - Properties:
+%   - `numGroups`: Number of flag groups.
+%   - `flagsPerGroup`: Number of flags in each group.
+%   - `flags`: Cell array containing the flag values for each group.
+%   - `fig`: Handle to the figure window.
+%   - `semaphoreAxes`: Cell array containing handles to axes objects for 
+% displaying the flag status.
+%   - `namesOfGroups`: Names of the flag groups.
+%   - `namesOfFlagsPerGroup`: Names of the flags within each group.
+% 
+% - Constructor:
+%   - Initializes the properties of the class.
+%   - Creates the GUI by calling the `createGUI` method.
+% 
+% - `createGUI` method:
+%   - Creates a figure window.
+%   - Calculates the layout of the flag groups in a grid.
+%   - Creates panels for each flag group.
+%   - Creates semaphore axes and toggle buttons for each flag within each 
+% group.
+%   - Sets up the GUI elements and their callbacks.
+% 
+% - toggleFlag method:
+%   - Callback function triggered when a toggle button is pressed.
+%   - Toggles the corresponding flag value.
+%   - Updates the semaphore display by calling the drawSemaphore method.
+% 
+% - drawSemaphore method:
+%   - Updates the semaphore display based on the flag value.
+%   - Uses rectangle function to draw a colored rectangle.
+
+% - Additional methods:
+%   - getFlags: Returns the current flag values for all groups.
+%   - getFlagsPerGroup: Returns the flag values for a specific group.
+%   - isGUIWindowClosed: Checks if the GUI window is closed.
+%   - getNumGroups: Returns the number of flag groups.
+%   - getGroupName: Returns the name of a group based on its index.
+
+% Overall, the BinaryFlagsGUI class provides a convenient way to create a 
+% GUI for managing binary flags organized into groups, with interactive 
+% toggle buttons and visual semaphore displays.
+% 
