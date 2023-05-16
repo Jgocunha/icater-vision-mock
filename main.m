@@ -1,18 +1,24 @@
+% Create the GUI and assign it to the variable 'gui'
 gui = callGUI();
 
 % Enter a while loop until the GUI window is closed
 while ~gui.isGUIWindowClosed()
-    % Get the flag values
+    % Get the flag values from the GUI
     flags = gui.getFlags();
 
-    % Access the flag values for a specific group and flag
-    groupIndex = 2;
-    flagIndex = 1;
-    flagValue = flags{groupIndex}(flagIndex);
-
-    % Do something with the flag value
-    disp(['Flag value: ' num2str(flagValue)]);
+    % Iterate through all the groups and print the flag values
+    for groupIndex = 1:gui.getNumGroups()
+        % Get the name of the current group
+        groupName = gui.getGroupName(groupIndex);
+        
+        % Get the flag values for the current group
+        flagValues = gui.getFlagsPerGroup(groupName);
+        
+        % Display the flag values for the current group
+        disp(['Flags for group ' groupName ':']);
+        disp(flagValues);
+    end
     
-    % Pause for a short duration
+    % Pause for a short duration to prevent excessive looping
     pause(0.1);
 end
