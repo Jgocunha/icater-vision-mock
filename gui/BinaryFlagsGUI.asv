@@ -7,14 +7,12 @@ classdef BinaryFlagsGUI < handle
         semaphoreAxes
         namesOfGroups
         namesOfFlagsPerGroup
-        titleFontSize
-        labelFontSize
-        groupColors
+        fontSize = 13
     end
     
     methods
         % Constructor
-        function obj = BinaryFlagsGUI(numGroups, flagsPerGroup, namesOfGroups, namesOfFlagsPerGroup, titleFontSize, labelFontSize, groupColors)
+        function obj = BinaryFlagsGUI(numGroups, flagsPerGroup, namesOfGroups, namesOfFlagsPerGroup)
             % Constructor initializes the properties of the class
             obj.numGroups = numGroups;
             obj.flagsPerGroup = flagsPerGroup;
@@ -24,17 +22,14 @@ classdef BinaryFlagsGUI < handle
             for i = 1:numGroups
                 obj.flags{i} = false(1, flagsPerGroup(i));
             end
-            obj.titleFontSize = titleFontSize;
-            obj.labelFontSize = labelFontSize;
-            obj.groupColors = groupColors;
             obj.createGUI();
         end
 
         % Method to create the GUI
         function createGUI(obj)
             % Create a figure window
-            sizeX = 2000;
-            sizeY = 800;
+            sizeX = 1000;
+            sizeY = 500;
             obj.fig = figure('Name', 'Binary Flags GUI', 'NumberTitle', 'off', 'Position', [100, 100, sizeX, sizeY]);
 
             % Calculate the number of rows and columns in the grid
@@ -57,10 +52,7 @@ classdef BinaryFlagsGUI < handle
                     panel = uipanel('Parent', obj.fig, 'Title', obj.namesOfGroups{groupCounter}, 'Units', 'pixels', 'Position', [panelX, panelY, panelWidth, panelHeight]);
 
                     % Increase font size for panel title
-                    set(panel, 'FontSize', obj.titleFontSize);
-
-                    % Set background color for panel
-                    set(panel, 'BackgroundColor', obj.groupColors(groupCounter, :));
+                    set(panel, 'FontSize', obj.fontSize);
 
                     % Create semaphore axes for each flag in the group
                     semWidth = 30;
@@ -76,7 +68,7 @@ classdef BinaryFlagsGUI < handle
                     end
 
                     % Create toggle buttons for each flag in the group
-                    btnWidth = 100;
+                    btnWidth = 50;
                     btnHeight = 30;
                     btnSpacing = 10;
                     btnStartX = (panelWidth - (btnWidth * obj.flagsPerGroup(groupCounter) + btnSpacing * (obj.flagsPerGroup(groupCounter) - 1))) / 2;
@@ -85,10 +77,7 @@ classdef BinaryFlagsGUI < handle
                         btnX = btnStartX + (btnWidth + btnSpacing) * (flag - 1);
                         btnY = btnStartY;  % Update the Y position for each button
                         btnLabel = obj.namesOfFlagsPerGroup{sum(obj.flagsPerGroup(1:groupCounter-1)) + flag};
-                        % Create the toggle button
-                        toggleBtn = uicontrol('Parent', panel, 'Style', 'togglebutton', 'String', btnLabel, 'Position', [btnX, btnY, btnWidth, btnHeight], 'Callback', {@obj.toggleFlag, groupCounter, flag});
-                        % Set the label font size
-                        set(toggleBtn, 'FontSize', obj.labelFontSize);
+                        uicontrol('Parent', panel, 'Style', 'togglebutton', 'String', btnLabel, 'Position', [btnX, btnY, btnWidth, btnHeight], 'Callback', {@obj.toggleFlag, groupCounter, flag});
                     end
 
                     groupCounter = groupCounter + 1;
@@ -141,6 +130,11 @@ classdef BinaryFlagsGUI < handle
         function groupName = getGroupName(obj, index)
             groupName = obj.namesOfGroups{index};
         end
+
+        % Set the font size of titles
+        function setTitleFontSize(obj, fontSize)
+            obj.titleFontSize = fontSize;
+            EN
     end
 end
 
