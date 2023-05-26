@@ -60,23 +60,26 @@ function gui = callGUI()
     gui = BinaryFlagsGUI(numGroups, flagsPerGroup, namesOfGroups, namesOfFlagsPerGroup, titleFontSize, labelFontSize, groupColors);
 end
 
-% 
-% This code is a function that creates a graphical user interface (GUI) 
-% using the BinaryFlagsGUI class. 
-% The GUI consists of flag groups, each with a set of flags that can be 
-% toggled on or off. 
-% The flag groups and their corresponding flags are defined by the 
-% namesOfGroups and namesOfFlagsPerGroup variables, respectively. 
-% The number of flags per group is specified by the flagsPerGroup variable.
-% 
-% The function initializes an instance of the BinaryFlagsGUI class with the 
-% provided parameters and returns it as the output. 
-% The created GUI can be interacted with by the user to toggle flags within 
-% each group.
-% 
-% Please note that the BinaryFlagsGUI class should be defined separately and 
-% available in the MATLAB path for this code to work correctly.
-% 
-% This function serves as an entry point to create and access the GUI, 
-% providing a convenient way to generate an instance of the BinaryFlagsGUI 
-% class with the predefined flag groups and flags.
+%
+% This function serves as an entry point to create a graphical user
+% interface (GUI) using the BinaryFlagsGUI class.
+%
+% The GUI consists of flag groups, each with a set of flags that can be
+% toggled on or off. The flag groups and their corresponding flags are
+% defined by the namesOfGroups and namesOfFlagsPerGroup variables,
+% respectively. The number of flags per group is specified by the
+% flagsPerGroup variable.
+%
+% The function initializes an instance of the BinaryFlagsGUI class with the
+% provided parameters, including the font sizes and group colors, and
+% returns it as the output.
+%
+% The created GUI can be interacted with by the user to toggle flags within
+% each group. The GUI provides visual semaphore displays and toggle buttons
+% for each flag, allowing users to easily manage binary flag values.
+%
+% Example usage:
+%   gui = callGUI();
+%
+% Note: The BinaryFlagsGUI class should be defined separately and available
+% in the MATLAB path for this code to work correctly.

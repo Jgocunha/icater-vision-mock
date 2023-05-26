@@ -14,7 +14,8 @@ classdef BinaryFlagsGUI < handle
     
     methods
         % Constructor
-        function obj = BinaryFlagsGUI(numGroups, flagsPerGroup, namesOfGroups, namesOfFlagsPerGroup, titleFontSize, labelFontSize, groupColors)
+        function obj = BinaryFlagsGUI(numGroups, flagsPerGroup, namesOfGroups, ...
+                namesOfFlagsPerGroup, titleFontSize, labelFontSize, groupColors)
             % Constructor initializes the properties of the class
             obj.numGroups = numGroups;
             obj.flagsPerGroup = flagsPerGroup;
@@ -35,7 +36,8 @@ classdef BinaryFlagsGUI < handle
             % Create a figure window
             sizeX = 2000;
             sizeY = 800;
-            obj.fig = figure('Name', 'Binary Flags GUI', 'NumberTitle', 'off', 'Position', [100, 100, sizeX, sizeY]);
+            obj.fig = figure('Name', 'Binary Flags GUI', 'NumberTitle', ...
+                'off', 'Position', [100, 100, sizeX, sizeY]);
 
             % Calculate the number of rows and columns in the grid
             numRows = ceil(sqrt(obj.numGroups));
@@ -54,7 +56,9 @@ classdef BinaryFlagsGUI < handle
                     end
                     panelX = (col - 1) * panelWidth;
                     panelY = sizeY - (row * panelHeight);
-                    panel = uipanel('Parent', obj.fig, 'Title', obj.namesOfGroups{groupCounter}, 'Units', 'pixels', 'Position', [panelX, panelY, panelWidth, panelHeight]);
+                    panel = uipanel('Parent', obj.fig, 'Title', ...
+                        obj.namesOfGroups{groupCounter}, 'Units', 'pixels', ...
+                        'Position', [panelX, panelY, panelWidth, panelHeight]);
 
                     % Increase font size for panel title
                     set(panel, 'FontSize', obj.titleFontSize);
@@ -145,49 +149,53 @@ classdef BinaryFlagsGUI < handle
 end
 
 
-% This code defines a class `BinaryFlagsGUI` which represents a graphical 
-% user interface (GUI) for managing binary flags organized into groups. 
+% This code defines a class `BinaryFlagsGUI` which represents a graphical
+% user interface (GUI) for managing binary flags organized into groups.
 % Here's an overview of the key components and functionalities of the class:
-% 
-% - Properties:
+%
+% Properties:
 %   - `numGroups`: Number of flag groups.
 %   - `flagsPerGroup`: Number of flags in each group.
 %   - `flags`: Cell array containing the flag values for each group.
 %   - `fig`: Handle to the figure window.
-%   - `semaphoreAxes`: Cell array containing handles to axes objects for 
-% displaying the flag status.
+%   - `semaphoreAxes`: Cell array containing handles to axes objects for
+%     displaying the flag status.
 %   - `namesOfGroups`: Names of the flag groups.
 %   - `namesOfFlagsPerGroup`: Names of the flags within each group.
-% 
-% - Constructor:
+%   - `titleFontSize`: Font size for group titles.
+%   - `labelFontSize`: Font size for flag labels.
+%   - `groupColors`: RGB values for the background colors of the groups.
+
+% Constructor:
 %   - Initializes the properties of the class.
 %   - Creates the GUI by calling the `createGUI` method.
-% 
-% - `createGUI` method:
+
+% createGUI method:
 %   - Creates a figure window.
 %   - Calculates the layout of the flag groups in a grid.
 %   - Creates panels for each flag group.
-%   - Creates semaphore axes and toggle buttons for each flag within each 
-% group.
+%   - Sets the background color for each panel based on `groupColors`.
+%   - Creates semaphore axes and toggle buttons for each flag within each
+%     group.
 %   - Sets up the GUI elements and their callbacks.
-% 
-% - toggleFlag method:
+
+% toggleFlag method:
 %   - Callback function triggered when a toggle button is pressed.
 %   - Toggles the corresponding flag value.
-%   - Updates the semaphore display by calling the drawSemaphore method.
-% 
-% - drawSemaphore method:
+%   - Updates the semaphore display by calling the `drawSemaphore` method.
+
+% drawSemaphore method:
 %   - Updates the semaphore display based on the flag value.
-%   - Uses rectangle function to draw a colored rectangle.
+%   - Uses the `rectangle` function to draw a colored rectangle.
 
-% - Additional methods:
-%   - getFlags: Returns the current flag values for all groups.
-%   - getFlagsPerGroup: Returns the flag values for a specific group.
-%   - isGUIWindowClosed: Checks if the GUI window is closed.
-%   - getNumGroups: Returns the number of flag groups.
-%   - getGroupName: Returns the name of a group based on its index.
+% Additional methods:
+%   - `getFlags`: Returns the current flag values for all groups.
+%   - `getFlagsPerGroup`: Returns the flag values for a specific group.
+%   - `isGUIWindowClosed`: Checks if the GUI window is closed.
+%   - `getNumGroups`: Returns the number of flag groups.
+%   - `getGroupName`: Returns the name of a group based on its index.
 
-% Overall, the BinaryFlagsGUI class provides a convenient way to create a 
-% GUI for managing binary flags organized into groups, with interactive 
-% toggle buttons and visual semaphore displays.
-% 
+% Overall, the `BinaryFlagsGUI` class provides a convenient way to create a
+% GUI for managing binary flags organized into groups, with interactive
+% toggle buttons, visual semaphore displays, and customizable background 
+% colors.
